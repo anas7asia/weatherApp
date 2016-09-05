@@ -10,6 +10,8 @@ angular.module('myApp')
     // show error if we can't find a chosen city
     $scope.weatherErr = false;
 
+    $scope.showMetric = true;
+
     // retrieve weather data according to geolocation
     geolocationFactory.getCurrentPosition()
       .then(function(location) {
@@ -36,7 +38,7 @@ angular.module('myApp')
     * @param data { Object } - json response to our http query
     */
     function insertCityDataToScope(data) {
-      console.log(data);
+
       if(data.cod == '404') {
         $scope.weatherErr = true;
       }
@@ -46,7 +48,7 @@ angular.module('myApp')
         var currentCityData = {
           'cityName': data.name,
           'country': data.sys.country,
-          'tempCelc': Math.round(data.main.temp),
+          'tempCels': Math.round(data.main.temp),
           'tempFahr': Math.round(data.main.temp * 1.8 + 32),
           'humidity': Math.round(data.main.humidity),
           'pressure': Math.round(data.main.pressure),
@@ -58,4 +60,21 @@ angular.module('myApp')
         $scope.weatherData.push(currentCityData);
       }
     }
+
+    $scope.chooseMetric = function() {
+      console.log("Here change!");
+      $scope.showMetric = true;
+    }
+    
+    $scope.chooseImperial = function() {
+      console.log("Here change!");
+      $scope.showMetric = false;
+    }
+
+    $scope.removeCity = function(idx) {
+      console.log("Here remove!");
+      $scope.weatherData.splice(idx, 1);
+    }
+
+    console.log($scope);
 }]);

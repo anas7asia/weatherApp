@@ -26,7 +26,7 @@
 
                 <div ng-repeat="weather in weatherData track by $index" class="city-weather-container city-weather-{{ weather.weather | lowercase }}">
 
-                    <div>
+                    <div class="city-data">
                         <p class="city-name">
                             <strong>{{ weather.cityName }}</strong>, 
                             {{ weather.country }}
@@ -41,53 +41,43 @@
                             
                             <div>
                                 <div class="weather-param-temp">                 
-                                    <input type="radio" name="temp-{{ $index }}" id="temp-metric-{{ $index }}" checked>
-                                    <label for="temp-metric-{{ $index }}" class="temp-label">C</label>
-                                    |
-                                    <input type="radio" name="temp-{{ $index }}" id="temp-imperial-{{ $index }}">
-                                    <label for="temp-imperial-{{ $index }}" class="temp-label">F</label>
                                     
-                                    <span id="celcius-{{ $index }}" class="weather-param-num">
-                                        {{ weather.tempCelc }}
+                                    <span class="weather-param-num">
+                                        {{ weather.tempCels }}
                                     </span>
-                                    <span id="fahrenheit-{{ $index }}" class="weather-param-num">
+                                    celcium
+                                    <!--<span class="weather-param-num">
                                         {{ weather.tempFahr }}
-                                    </span>
+                                    </span>-->
+                                    
+                                    <!--<a target="_self" href="google.com">Go</a>-->
                                 </div>
                             </div>
                         </div>
 
                         <div class="weather-param">
                             <p class="weather-param-title">Humidity</p>
-                            <div>
-                                <div>
-                                    <span class="weather-param-num">{{ weather.humidity }}</span>
-                                    perc
-                                </div>
-                                <!--<img src="" alt="">-->
-                            </div>
+                            <span class="weather-param-num">{{ weather.humidity }}</span>
+                            perc
                         </div>
 
                         <div class="weather-param">
                             <p class="weather-param-title">Pressure</p>
-                            <div>
-                                <div>
-                                    <span class="weather-param-num">{{ weather.pressure }}</span>
-                                    hPa
-                                </div>
-                            </div>
+                            <span class="weather-param-num">{{ weather.pressure }}</span>
+                            hPa
                         </div>
 
                         <div class="weather-param">
                             <p class="weather-param-title">Wind</p>
-                            <div>
-                                <div>
-                                    <span class="weather-param-num">{{ weather.wind }}</span>
-                                    m/s
-                                </div>
-                            </div>
+                            <span class="weather-param-num">{{ weather.wind }}</span>
+                            m/s
+                        </div>
+                    
+                        <div class="delete-btn-container">
+                            <a href="" class="btn-delete-city" ng-click="removeCity($index)">&#10005;</a>
                         </div>
                     </div>
+
 
                 </div>
 
