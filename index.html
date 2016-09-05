@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html lang="en" ng-app="myApp">
+    <head>
+        <title>Weather App</title>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <!--<script src="https://code.angularjs.org/1.5.8/angular-messages.min.js"></script>-->
+        <script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+        <script src="app.js"></script>
+        <script src="factories/geolocation-factory.js"></script>
+        <script src="factories/weather-factory.js"></script>
+        <script src="controllers/weather-controller.js"></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Tillana" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Local weather app</h1> 
+        </header>
+
+        <div class="wrapper">
+            <div ng-controller="WeatherController">
+
+
+                <div ng-repeat="weather in weatherData track by $index" class="city-weather-container city-weather-{{ weather.weather | lowercase }}">
+
+                    <div>
+                        <p class="city-name">
+                            <strong>{{ weather.cityName }}</strong>, 
+                            {{ weather.country }}
+                        </p> 
+                        <p class="weather-desc">{{ weather.weatherDesc }}</p>
+                        <img src="img/{{ weather.weather | lowercase }}.png" class="weather-icon" width="100px" height="100px" alt="weather pictogram">
+                    </div>
+
+                    <div class="weather-params-container">
+                        <div class="weather-param">
+                            <p class="weather-param-title">Temperature</p>
+                            
+                            <div>
+                                <div class="weather-param-temp">                 
+                                    <input type="radio" name="temp-{{ $index }}" id="temp-metric-{{ $index }}" checked>
+                                    <label for="temp-metric-{{ $index }}" class="temp-label">C</label>
+                                    |
+                                    <input type="radio" name="temp-{{ $index }}" id="temp-imperial-{{ $index }}">
+                                    <label for="temp-imperial-{{ $index }}" class="temp-label">F</label>
+                                    
+                                    <span id="celcius-{{ $index }}" class="weather-param-num">
+                                        {{ weather.tempCelc }}
+                                    </span>
+                                    <span id="fahrenheit-{{ $index }}" class="weather-param-num">
+                                        {{ weather.tempFahr }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="weather-param">
+                            <p class="weather-param-title">Humidity</p>
+                            <div>
+                                <div>
+                                    <span class="weather-param-num">{{ weather.humidity }}</span>
+                                    perc
+                                </div>
+                                <!--<img src="" alt="">-->
+                            </div>
+                        </div>
+
+                        <div class="weather-param">
+                            <p class="weather-param-title">Pressure</p>
+                            <div>
+                                <div>
+                                    <span class="weather-param-num">{{ weather.pressure }}</span>
+                                    hPa
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="weather-param">
+                            <p class="weather-param-title">Wind</p>
+                            <div>
+                                <div>
+                                    <span class="weather-param-num">{{ weather.wind }}</span>
+                                    m/s
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <form name="citySearchForm" id="city-search-form" ng-submit="getAnotherCityWeather(citySearch)">
+                    <label for="city-search">Looking for another city?</label>
+                    <input 
+                        type="text" 
+                        ng-model="citySearch" 
+                        id="city-search"
+                        placeholder="City name"
+                        required> 
+                    <button 
+                        type="submit" 
+                        ng-disabled="citySearchForm.$invalid">
+                        Search!
+                    </button>
+
+                    <div ng-if="weatherErr">Sorry, we couldn't find your city</div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

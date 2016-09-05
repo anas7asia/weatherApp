@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+header {
+    padding: 1em;
+    background-color: #E4F1FE;
+    box-shadow: 2px 1px 1px 1px rgba(0,0,0,.4);
+}
+
+header h1 {
+    font-family: 'Tillana', cursive;
+    font-size: 1.3em;
+}
+
+.city-weather-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2em;
+    min-height: 30vh;
+    background-color: lightseagreen;
+    background-position: center top;
+    background-size: cover;
+    transform: rotateX('30'); 
+}
+
+.city-weather-thunderstorm {
+    background-image: url('https://pixabay.com/static/uploads/photo/2016/08/12/20/14/yellowstone-1589613_960_720.jpg');
+}
+.city-weather-drizzle {
+    background-image: url('https://pixabay.com/static/uploads/photo/2016/05/31/21/53/raindrop-1427952_960_720.jpg');
+}
+.city-weather-rain {
+    background-image: url('https://pixabay.com/static/uploads/photo/2016/08/14/21/57/raindrops-1594135_960_720.jpg');
+}
+.city-weather-snow {
+    background-image: url('https://pixabay.com/static/uploads/photo/2014/02/07/10/19/winter-260817_960_720.jpg');
+}
+.city-weather-clear {
+    background-image: url('https://pixabay.com/static/uploads/photo/2015/12/04/19/56/sky-background-1077084_960_720.jpg');
+}
+.city-weather-clouds {
+    background-image: url('https://pixabay.com/static/uploads/photo/2014/08/09/15/45/sky-414199_960_720.jpg');
+}
+
+.city-name {
+    margin-bottom: .7em;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.weather-desc {
+    margin-bottom: .7em;
+}
+
+.weather-icon {
+    object-fit: contain;
+}
+
+.weather-params-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.weather-param {
+    position: relative;
+    margin-left: .8em;
+    padding: 1.5em;
+    text-align: center;
+}
+
+.weather-param:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    border-radius: .4em;
+    background-color: rgba(255,255,255,.2);
+    filter: blur(30px);
+}
+
+.weather-param-title {
+    margin-bottom: .8em;
+    font-weight: bold;
+}
+
+.weather-param-num {
+    display: block;
+    font-size: 3em;
+}
+
+.weather-temp {
+    color: #fff;
+}
+
+.weather-param-temp {
+    direction: rtl;
+}
+
+input[id^=temp-metric],
+input[id^=temp-imperial],
+span[id^=celcius],
+span[id^=fahrenheit] {
+    display: none;
+}
+
+input[id^=temp-metric]:checked ~ span[id^=celcius] {
+    display: block;
+}
+
+input[id^=temp-imperial]:checked ~ span[id^=fahrenheit] {
+    display: block;
+}
+
+.temp-label {
+    opacity: .5;
+}
+
+input[id^=temp-imperial]:checked ~ .temp-label {
+    opacity: 1;
+    font-size: 1.5em;
+}
+
+/*********** 
+ SEARCH FORM 
+************/
+
+#city-search-form {
+    margin: 0 auto;
+    margin-top: 4em;
+    width: 40%;
+    /*text-align: center;*/
+}
+
+#city-search-form label {
+    display: block;
+    margin-left: .7em;
+    margin-bottom: .5em;
+    font-weight: bold;
+}
+
+#city-search {
+    margin-bottom: .5em;
+    padding: .5em .7em;
+    width: 80%;
+    border: 1px solid lightskyblue;
+    border-radius: .4em;
+    font-size: 1.1em;
+}
+
+#city-search-form button {
+    display: inline-block;
+    padding: .5em .7em;
+    border: 1px solid #2574A9;
+    border-radius: .4em;
+    background-color: #2574A9;
+    color: #fff;
+    font-size: 1.1em;
+}
