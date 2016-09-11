@@ -1,16 +1,20 @@
 angular.module('myApp')
   .controller('WeatherController', 
               ['$scope',
+               '$log',
                'GeolocationFactory',
-               'WeatherFactory', 
-               function WeatherController($scope, geolocationFactory, weatherFactory) {
+               'WeatherFactory',
+               function WeatherController($scope, $log, geolocationFactory, weatherFactory) {
 
+    $scope.isLoading = true;
     //store data for all cities
     $scope.weatherData = [];
     // show error if we can't find a chosen city
     $scope.weatherErr = false;
-
     $scope.showMetric = true;
+    $scope.searchCityForm = { searchCity: 'abc' };
+
+    $scope.items = ['1', '2', '3', '4'];
 
     // retrieve weather data according to geolocation
     geolocationFactory.getCurrentPosition()
@@ -20,6 +24,7 @@ angular.module('myApp')
 
         weatherFactory.getWeatherByGeolocation(lat, lon)
           .then(function(weather) {
+            $scope.isLoading = false;
             insertCityDataToScope(weather.data);
           });
       });
@@ -29,8 +34,7 @@ angular.module('myApp')
       weatherFactory.getWeatherByCityName(cityName)
         .then(function(weather) {
             insertCityDataToScope(weather.data);
-            $scope.citySearchForm.$setPristine();
-            $scope.citySearch = '';
+            $scope.searchCityForm.searchCity = '';
         })
     }
 
@@ -76,5 +80,5 @@ angular.module('myApp')
       $scope.weatherData.splice(idx, 1);
     }
 
-    console.log($scope);
+    // console.log($scope);
 }]);

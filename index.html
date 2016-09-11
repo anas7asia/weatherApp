@@ -3,14 +3,15 @@
 <html lang="en" ng-app="myApp">
     <head>
         <title>Weather App</title>
-        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.5.2/angular.min.js"></script>
         <!--<script src="https://code.angularjs.org/1.5.8/angular-messages.min.js"></script>-->
-        <script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+        <!--<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-animate.min.js"></script>
+        
         <script src="app.js"></script>
         <script src="factories/geolocation-factory.js"></script>
         <script src="factories/weather-factory.js"></script>
         <script src="controllers/weather-controller.js"></script>
-
         <link href="https://fonts.googleapis.com/css?family=Tillana" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -23,81 +24,93 @@
         <div class="wrapper">
             <div ng-controller="WeatherController">
 
+                <!-- Loader -->
+                <div ng-if="isLoading">
+                    Loading...
+                </div>
 
-                <div ng-repeat="weather in weatherData track by $index" class="city-weather-container city-weather-{{ weather.weather | lowercase }}">
+                <!-- after city info is loaded -->
+                <div ng-if="!isLoading">
 
-                    <div class="city-data">
-                        <p class="city-name">
-                            <strong>{{ weather.cityName }}</strong>, 
-                            {{ weather.country }}
-                        </p> 
-                        <p class="weather-desc">{{ weather.weatherDesc }}</p>
-                        <img src="img/{{ weather.weather | lowercase }}.png" class="weather-icon" width="100px" height="100px" alt="weather pictogram">
-                    </div>
+                    <div>
 
-                    <div class="weather-params-container">
-                        <div class="weather-param">
-                            <p class="weather-param-title">Temperature</p>
-                            
-                            <div>
-                                <div class="weather-param-temp">                 
-                                    
-                                    <span class="weather-param-num">
-                                        {{ weather.tempCels }}
-                                    </span>
-                                    celcium
-                                    <!--<span class="weather-param-num">
-                                        {{ weather.tempFahr }}
-                                    </span>-->
-                                    
-                                    <!--<a target="_self" href="google.com">Go</a>-->
+                    <!-- display all the cities info -->
+                    <div 
+                        ng-repeat="weather in weatherData" 
+                        class="city-weather-container city-weather-{{ weather.weather | lowercase }}">
+
+                        <!-- one city principal information -->
+                        <div class="city-data">
+                            <p class="city-name">
+                                <strong>{{ weather.cityName }}</strong>, 
+                                {{ weather.country }}
+                            </p> 
+                            <p class="weather-desc">{{ weather.weatherDesc }}</p>
+                            <!--<img src="img/{{ weather.weather | lowercase }}.png" class="weather-icon" width="100px" height="100px" alt="weather pictogram">-->
+                        </div>
+
+                        <!-- one city weather details -->
+                        <div class="weather-params-container">
+                            <div class="weather-param">
+                                <p class="weather-param-title">Temperature</p>
+                                
+                                <div>
+                                    <div class="weather-param-temp">                 
+                                        
+                                        <span class="weather-param-num">
+                                            {{ weather.tempCels }}
+                                        </span>
+                                        celcium
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="weather-param">
-                            <p class="weather-param-title">Humidity</p>
-                            <span class="weather-param-num">{{ weather.humidity }}</span>
-                            perc
-                        </div>
+                            <div class="weather-param">
+                                <p class="weather-param-title">Humidity</p>
+                                <span class="weather-param-num">{{ weather.humidity }}</span>
+                                perc
+                            </div>
 
-                        <div class="weather-param">
-                            <p class="weather-param-title">Pressure</p>
-                            <span class="weather-param-num">{{ weather.pressure }}</span>
-                            hPa
-                        </div>
+                            <div class="weather-param">
+                                <p class="weather-param-title">Pressure</p>
+                                <span class="weather-param-num">{{ weather.pressure }}</span>
+                                hPa
+                            </div>
 
-                        <div class="weather-param">
-                            <p class="weather-param-title">Wind</p>
-                            <span class="weather-param-num">{{ weather.wind }}</span>
-                            m/s
-                        </div>
-                    
-                        <div class="delete-btn-container">
-                            <a href="" class="btn-delete-city" ng-click="removeCity($index)">&#10005;</a>
-                        </div>
-                    </div>
-
+                            <div class="weather-param">
+                                <p class="weather-param-title">Wind</p>
+                                <span class="weather-param-num">{{ weather.wind }}</span>
+                                m/s
+                            </div>
+                        
+                            <div class="delete-btn-container">
+                                <a href="" class="btn-delete-city" ng-click="removeCity($index)">&#10005;</a>
+                            </div>
+                        </div> <!-- end of div.weather-params-container -->
+                    </div> <!-- end of div.city-weather-container - ng-repeat -->
 
                 </div>
 
-                <form name="citySearchForm" id="city-search-form" ng-submit="getAnotherCityWeather(citySearch)">
+                <form id="city-search-form" ng-submit="getAnotherCityWeather(searchCityForm.searchCity)">
                     <label for="city-search">Looking for another city?</label>
                     <input 
                         type="text" 
-                        ng-model="citySearch" 
+                        name="searchCityForm.searchCity" 
+                        ng-model="searchCityForm.searchCity" 
                         id="city-search"
                         placeholder="City name"
                         required> 
                     <button 
                         type="submit" 
-                        ng-disabled="citySearchForm.$invalid">
+                        ng-disabled="searchCityForm.$invalid">
                         Search!
                     </button>
 
                     <div ng-if="weatherErr">Sorry, we couldn't find your city</div>
                 </form>
-            </div>
-        </div>
+            
+                </div> <!-- end of !isLoading -->
+            </div> <!-- end of WeatherController -->
+        </div> <!-- end of div.wrapper -->
     </body>
 </html>
