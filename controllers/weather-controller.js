@@ -11,10 +11,8 @@ angular.module('myApp')
     $scope.weatherData = [];
     // show error if we can't find a chosen city
     $scope.weatherErr = false;
-    $scope.showMetric = true;
-    $scope.searchCityForm = { searchCity: 'abc' };
-
-    $scope.items = ['1', '2', '3', '4'];
+    // $scope.showMetric = true;
+    $scope.searchCityForm = { searchCity: 'Fakel' };
 
     // retrieve weather data according to geolocation
     geolocationFactory.getCurrentPosition()
@@ -65,20 +63,13 @@ angular.module('myApp')
       }
     }
 
-    $scope.chooseMetric = function() {
-      console.log("Here change!");
-      $scope.showMetric = true;
-    }
-    
-    $scope.chooseImperial = function() {
-      console.log("Here change!");
-      $scope.showMetric = false;
-    }
-
     $scope.removeCity = function(idx) {
-      console.log("Here remove!");
+      $log.log("Here remove!");
       $scope.weatherData.splice(idx, 1);
     }
 
+    $scope.showScope = function(e) {
+      console.log(angular.element(e.srcElement).scope());
+    }
     // console.log($scope);
 }]);

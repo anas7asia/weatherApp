@@ -11,6 +11,7 @@
         <script src="app.js"></script>
         <script src="factories/geolocation-factory.js"></script>
         <script src="factories/weather-factory.js"></script>
+        <script src="controllers/city-controller.js"></script>
         <script src="controllers/weather-controller.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Tillana" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
@@ -37,6 +38,7 @@
                     <!-- display all the cities info -->
                     <div 
                         ng-repeat="weather in weatherData" 
+                        ng-controller="CityController"
                         class="city-weather-container city-weather-{{ weather.weather | lowercase }}">
 
                         <!-- one city principal information -->
@@ -54,14 +56,19 @@
                             <div class="weather-param">
                                 <p class="weather-param-title">Temperature</p>
                                 
-                                <div>
-                                    <div class="weather-param-temp">                 
-                                        
-                                        <span class="weather-param-num">
-                                            {{ weather.tempCels }}
-                                        </span>
-                                        celcium
-                                    </div>
+                                <div class="weather-param-temp">                 
+                                    
+                                    <span class="weather-param-num" ng-if="showMetric">
+                                        {{ weather.tempCels }}
+                                    </span>
+
+                                    <span class="weather-param-num" ng-if="!showMetric">
+                                        {{ weather.tempFahr }}
+                                    </span>
+                                    
+                                    <a href="" class="btn-delete-city" ng-click="chooseMetric($index)">cels</a> |
+                                    <a href="" class="btn-delete-city" ng-click="showMetric=!showMetric">fahr</a>
+
                                 </div>
                             </div>
 
@@ -85,6 +92,9 @@
                         
                             <div class="delete-btn-container">
                                 <a href="" class="btn-delete-city" ng-click="removeCity($index)">&#10005;</a>
+                                <!--<a href="" class="btn-delete-city" ng-click="chooseMetric($index)">cels</a> |
+                                <a href="" class="btn-delete-city" ng-click="chooseImperial($index)">fahr</a>-->
+                                <a href="" class="btn-delete-city" ng-click="showScope($event)">scope</a>
                             </div>
                         </div> <!-- end of div.weather-params-container -->
                     </div> <!-- end of div.city-weather-container - ng-repeat -->
