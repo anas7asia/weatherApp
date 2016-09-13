@@ -3,6 +3,17 @@ angular.module('myApp')
 
     $scope.showMetric = true;
 
+    // $scope.city = {
+    //   chooseMetric: function() {
+    //     $log.log($scope);
+    //     $scope.showMetric = true;
+    //   },
+    //   chooseImperial: function() {
+    //     $log.log($scope);
+    //     $scope.showMetric = false;
+    //   }
+    // }
+
     $scope.chooseMetric = function() {
       $log.log($scope);
       $scope.showMetric = true;

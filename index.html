@@ -38,7 +38,7 @@
                     <!-- display all the cities info -->
                     <div 
                         ng-repeat="weather in weatherData" 
-                        ng-controller="CityController"
+                        ng-controller="CityController as city"
                         class="city-weather-container city-weather-{{ weather.weather | lowercase }}">
 
                         <!-- one city principal information -->
@@ -58,17 +58,19 @@
                                 
                                 <div class="weather-param-temp">                 
                                     
-                                    <span class="weather-param-num" ng-if="showMetric">
-                                        {{ weather.tempCels }}
+                                    <span ng-if="showMetric">
+                                        <span class="weather-param-num" >
+                                            {{ weather.tempCels }} 
+                                        </span>
+                                        celsius
                                     </span>
 
-                                    <span class="weather-param-num" ng-if="!showMetric">
-                                        {{ weather.tempFahr }}
+                                    <span ng-if="!showMetric">
+                                        <span class="weather-param-num">
+                                            {{ weather.tempFahr }} 
+                                        </span>
+                                        fahrenhaits
                                     </span>
-                                    
-                                    <a href="" class="btn-delete-city" ng-click="chooseMetric($index)">cels</a> |
-                                    <a href="" class="btn-delete-city" ng-click="showMetric=!showMetric">fahr</a>
-
                                 </div>
                             </div>
 
@@ -92,9 +94,8 @@
                         
                             <div class="delete-btn-container">
                                 <a href="" class="btn-delete-city" ng-click="removeCity($index)">&#10005;</a>
-                                <!--<a href="" class="btn-delete-city" ng-click="chooseMetric($index)">cels</a> |
-                                <a href="" class="btn-delete-city" ng-click="chooseImperial($index)">fahr</a>-->
-                                <a href="" class="btn-delete-city" ng-click="showScope($event)">scope</a>
+                                <a href="" class="btn-delete-city" ng-click="chooseMetric()">cels</a> | 
+                                <a href="" class="btn-delete-city" ng-click="chooseImperial()">fahr</a> 
                             </div>
                         </div> <!-- end of div.weather-params-container -->
                     </div> <!-- end of div.city-weather-container - ng-repeat -->

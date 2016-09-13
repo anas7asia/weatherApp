@@ -153,7 +153,8 @@ header h1 {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9eff7', endColorstr='#f9e2f9', GradientType=1 );
 }
 
-.city-weather-haze {
+.city-weather-haze,
+.city-weather-mist {
     background: rgba(212,228,239,1);
     background: -moz-linear-gradient(45deg, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
     background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(134,174,204,1)));

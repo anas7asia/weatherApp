@@ -14,6 +14,8 @@ angular.module('myApp')
     // $scope.showMetric = true;
     $scope.searchCityForm = { searchCity: 'Fakel' };
 
+    $scope.isMetric = true;
+
     // retrieve weather data according to geolocation
     geolocationFactory.getCurrentPosition()
       .then(function(location) {
@@ -67,6 +69,14 @@ angular.module('myApp')
       $log.log("Here remove!");
       $scope.weatherData.splice(idx, 1);
     }
+
+    // $scope.toggleMetric = function(repeatScope) {
+    //   if (repeatScope.isMetric) {
+    //     repeatScope.isMetric = false;
+    //   } else {
+    //     repeatScope.isMetric = true;
+    //   }
+    // };
 
     $scope.showScope = function(e) {
       console.log(angular.element(e.srcElement).scope());
