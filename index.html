@@ -13,7 +13,8 @@
         <script src="factories/weather-factory.js"></script>
         <script src="controllers/city-controller.js"></script>
         <script src="controllers/weather-controller.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Tillana" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -27,7 +28,7 @@
 
                 <!-- Loader -->
                 <div ng-if="isLoading">
-                    Loading...
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true"></i>
                 </div>
 
                 <!-- after city info is loaded -->
@@ -71,7 +72,7 @@
                                         <span class="weather-param-num">
                                             {{ weather.tempFahr }} 
                                         </span>
-                                        fahrenhaits
+                                        fahrenheits
                                     </span>
                                 </div>
                             </div>
@@ -105,19 +106,18 @@
                                 <div>m/s</div>
                             </div>
                         
-                            <div class="delete-btn-container">
-                                <a href="" class="btn-delete-city" ng-click="removeCity($index)">&#10005;</a>
-                                <a href="" class="btn-delete-city" ng-click="chooseMetric()">cels</a> | 
-                                <a href="" class="btn-delete-city" ng-click="chooseImperial()">fahr</a> 
-                                <a href="" class="btn-delete-city" ng-click="stopBlowing()">wind</a> 
-                                
+                            <div class="ctrl-btn-container">
+                                <a href="" class="ctrl-btn btn-delete-city" ng-click="removeCity($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a href="" class="ctrl-btn btn-choose-systeme" ng-click="chooseImperial()" ng-if="showMetric">C</a>
+                                <a href="" class="ctrl-btn btn-choose-systeme" ng-click="chooseMetric()" ng-if="!showMetric">F</a> 
+                                <a href="" class="ctrl-btn btn-let-blow" ng-class="{'btn-no-wind' : !letWindBlow}" ng-click="stopBlowing()"><i class="fa fa-flag-o" aria-hidden="true"></i></a> 
                             </div>
                         </div> <!-- end of div.weather-params-container -->
                     </div> <!-- end of div.city-weather-container - ng-repeat -->
 
                 </div>
 
-                <form id="city-search-form" ng-submit="getAnotherCityWeather(searchCityForm.searchCity)">
+                <form name="form" id="city-search-form" ng-submit="getAnotherCityWeather(searchCityForm.searchCity)">
                     <label for="city-search">Looking for another city?</label>
                     <input 
                         type="text" 
@@ -128,7 +128,7 @@
                         required> 
                     <button 
                         type="submit" 
-                        ng-disabled="searchCityForm.$invalid || submittingCity">
+                        ng-disabled="form.$invalid">
                         Search!
                     </button>
 
