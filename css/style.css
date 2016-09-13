@@ -229,24 +229,75 @@ header h1 {
     font-size: 3em;
 }
 
-.weather-temp {
-    color: #fff;
+/*********** 
+  WINDMILL 
+************/
+
+.weather-param-wind {
+    display: inline-block;
 }
 
-.weather-param-temp {
-    direction: rtl;
+.windmill {
+    display: inline-block;
+    margin-left: .55em;
+}    
+
+.windmill-body {
+    position: relative;
+    width: .23em;
+    height: 2.5em;
+    background-color: #000;
+    /*border-radius: 1em / 5em;*/
 }
 
-.temp-label {
-    opacity: .5;
-    font-size: .8em;
+.windmill-wing {
+    position: absolute;
+    top: -38%;
+    left: 10%;
+    width: .21em;
+    height: 2.3em;
+    background-color: #000;
+    border-radius: 1em / 5em;
+    z-index: 2;
 }
 
-.temp-label__active {
-    opacity: 1;
-    font-size: 1.2em;
+.windmill-wing-1 {
+    transform: rotate(45deg);
 }
 
+.windmill-wing-1-animated {
+    animation-name: rotateWing1;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.windmill-wing-2 {
+    transform: rotate(-45deg);
+}
+
+.windmill-wing-2-animated {
+    animation-name: rotateWing2;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotateWing1 {
+    0% {
+        transform: rotate(45deg);
+    }
+    100% {
+        transform: rotate(395deg);
+    }
+}
+
+@keyframes rotateWing2 {
+    0% {
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(315deg);
+    }
+}
 
 /*********** 
  DELETE BTN 

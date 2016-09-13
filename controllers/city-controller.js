@@ -3,6 +3,8 @@ angular.module('myApp')
 
     $scope.showMetric = true;
 
+    $scope.letWindBlow = true;
+
     // $scope.city = {
     //   chooseMetric: function() {
     //     $log.log($scope);
@@ -24,5 +26,10 @@ angular.module('myApp')
       $scope.showMetric = false;
     }
 
+    $scope.stopBlowing = function() {
+      $log.log($scope);
+      $scope.letWindBlow = !$scope.letWindBlow;
+    }
+    
     $log.log($scope);
 }]);

@@ -11,10 +11,9 @@ angular.module('myApp')
     $scope.weatherData = [];
     // show error if we can't find a chosen city
     $scope.weatherErr = false;
-    // $scope.showMetric = true;
     $scope.searchCityForm = { searchCity: 'Fakel' };
-
-    $scope.isMetric = true;
+    // to prevent sending a request twice 
+    $scope.submittingCity = false;
 
     // retrieve weather data according to geolocation
     geolocationFactory.getCurrentPosition()
@@ -31,10 +30,12 @@ angular.module('myApp')
 
     // retrive weather data by city name
     $scope.getAnotherCityWeather = function(cityName) {
+      $scope.submittingCity = true;
       weatherFactory.getWeatherByCityName(cityName)
         .then(function(weather) {
             insertCityDataToScope(weather.data);
             $scope.searchCityForm.searchCity = '';
+            $scope.submittingCity = false;
         })
     }
 
