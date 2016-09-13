@@ -67,20 +67,7 @@ angular.module('myApp')
     }
 
     $scope.removeCity = function(idx) {
-      $log.log("Here remove!");
       $scope.weatherData.splice(idx, 1);
     }
 
-    // $scope.toggleMetric = function(repeatScope) {
-    //   if (repeatScope.isMetric) {
-    //     repeatScope.isMetric = false;
-    //   } else {
-    //     repeatScope.isMetric = true;
-    //   }
-    // };
-
-    $scope.showScope = function(e) {
-      console.log(angular.element(e.srcElement).scope());
-    }
-    // console.log($scope);
 }]);

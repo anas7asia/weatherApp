@@ -20,15 +20,20 @@ header h1 {
 }
 
 .city-weather-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     padding: 2em;
     min-height: 30vh;
     background-color: lightseagreen;
     /*box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.3);*/
     perspective: 30px;
     transform-origin: top left;
+}
+
+@media screen and (min-width: 850px) {
+    .city-weather-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 .city-weather-container.ng-enter {
@@ -206,7 +211,7 @@ header h1 {
     text-align: center;
 }
 
-.weather-param:before {
+.weather-param::before {
     position: absolute;
     top: 0;
     left: 0;
@@ -216,7 +221,12 @@ header h1 {
     border: 1px solid transparent;
     border-radius: .4em;
     background-color: rgba(255,255,255,.2);
-    filter: blur(30px);
+}
+
+@media screen and (max-width: 850px) {
+    .weather-param {
+        margin-bottom: .5em;
+    }
 }
 
 .weather-param-title {
@@ -362,11 +372,20 @@ header h1 {
 
 #city-search-form {
     margin: 4em auto 40vh;
-    /*margin-top: 4em;*/
-    /*margin-bottom: 3em;*/
-    width: 40%;
-    /*text-align: center;*/
+    width: 80%;
     transition: all 500ms ease;
+}
+
+@media screen and (min-width: 800px) {
+    #city-search-form {
+        width: 70%
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    #city-search-form {
+        width: 40%
+    }
 }
 
 #city-search-form label {
